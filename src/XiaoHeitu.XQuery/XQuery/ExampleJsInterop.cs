@@ -1,7 +1,7 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace BQuery
+namespace XQuery
 {
     public class ExampleJsInterop
     {
