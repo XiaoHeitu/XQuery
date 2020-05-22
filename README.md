@@ -1,2 +1,2 @@
-# BQuery
+# XQuery
 jQuery on Blazor Webassembly
