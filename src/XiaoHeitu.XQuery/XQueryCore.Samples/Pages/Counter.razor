@@ -1,0 +1,23 @@
+﻿@page "/counter"
+@inject XiaoHeitu.XQueryCore.XQuery xQuery 
+
+<h1>Counter</h1>
+
+<p id="pCur">Current count: 0</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            currentCount++;
+            var element = await xQuery.Get("#pCur");
+            element.Text = $"Current count: {currentCount}";
+            await Task.Delay(1);
+        }
+    }
+}
