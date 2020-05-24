@@ -16,23 +16,34 @@ namespace XiaoHeitu.XQueryCore
             this.xQuery = xQuery;
             this.guid = guid;
         }
-        public string Text
+        //public string Text
+        //{
+        //    get
+        //    {
+        //        return GetText().Result;
+        //    }
+        //    set
+        //    {
+        //        _ = SetText(value);
+        //    }
+        //}
+
+        public IXQueryElement Text(string text)
         {
-            get
-            {
-                return GetText().Result;
-            }
-            set
-            {
-                _ = SetText(value);
-            }
+            TextAsync(text);
+            return this;
+        }
+        public string Text()
+        {
+            return TextAsync().Result;
         }
 
-        public async Task SetText(string text)
+        public async ValueTask<IXQueryElement> TextAsync(string text)
         {
             await xQuery.jsRuntime.InvokeVoidAsync("xquery.invoke", guid, "text", new string[] { text });
+            return this;
         }
-        public async Task<string> GetText()
+        public async ValueTask<string> TextAsync()
         {
             return await xQuery.jsRuntime.InvokeAsync<string>("xquery.invoke", guid, "text");
         }

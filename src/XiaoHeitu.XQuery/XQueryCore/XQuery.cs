@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
 using System;
 using System.Text.Json;
@@ -16,10 +17,17 @@ namespace XiaoHeitu.XQueryCore
             this.jsRuntime = jsRuntime;
         }
 
-        public async Task<IXQueryElement> Get(string selector)
+        public IXQueryElement Find(string selector)
         {
             var guid = Guid.NewGuid().ToString("N");
-            await jsRuntime.InvokeVoidAsync("xquery.get", selector, guid);
+            jsRuntime.InvokeVoidAsync("xquery.find", selector, guid);
+            return new XQueryElement(this, guid);
+        }
+
+        public async Task<IXQueryElement> FindAsync(string selector)
+        {
+            var guid = Guid.NewGuid().ToString("N");
+            await jsRuntime.InvokeVoidAsync("xquery.find", selector, guid);
             return new XQueryElement(this, guid);
         }
     }

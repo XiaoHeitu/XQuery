@@ -1,5 +1,4 @@
 ﻿@page "/counter"
-@inject XiaoHeitu.XQueryCore.XQuery xQuery 
 
 <h1>Counter</h1>
 
@@ -15,8 +14,7 @@
         for (int i = 0; i < 100; i++)
         {
             currentCount++;
-            var element = await xQuery.Get("#pCur");
-            element.Text = $"Current count: {currentCount}";
+            this.XQ("#pCur").Text($"Current count: {currentCount}");
             await Task.Delay(1);
         }
     }

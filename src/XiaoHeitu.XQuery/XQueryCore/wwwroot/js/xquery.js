@@ -1,6 +1,6 @@
 ﻿window.xquery = {
     dommaps: {},
-    get: function (s, guid) {
+    find: function (s, guid) {
         var map = {};
         map["E" + guid] = $(s);
         $.extend(window.xquery.dommaps, map);

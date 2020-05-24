@@ -6,6 +6,7 @@ namespace XiaoHeitu.XQueryCore
 {
     public interface IXQueryElement
     {
-        string Text { get; set; }
+        IXQueryElement Text(string text);
+        string Text();
     }
 }
