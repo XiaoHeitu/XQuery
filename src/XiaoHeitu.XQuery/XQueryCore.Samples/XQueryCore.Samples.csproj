@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XQuery\XQuery.csproj" />
+    <ProjectReference Include="..\XQueryCore\XQueryCore.csproj" />
   </ItemGroup>
 
 </Project>
