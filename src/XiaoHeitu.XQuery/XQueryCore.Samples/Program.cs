@@ -19,10 +19,14 @@ namespace XiaoHeitu.XQueryCore.Samples
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            //注入XQuery服务
             builder.Services.AddXQuery();
 
             var host = builder.Build();
-            host.UseXQuery();
+
+            //初始化XQuery服务
+            host.InitXQuery();
 
             await host.RunAsync();
         }

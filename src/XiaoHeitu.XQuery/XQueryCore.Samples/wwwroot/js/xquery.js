@@ -17,7 +17,7 @@
                 psstring = psstring + ps[i] + ",";
             }
         }
-        if (psstring != "") {
+        if (psstring !== "") {
             psstring = psstring.substr(0, psstring.length - 1);
         }
         var code = "e." + f + "(" + psstring + ")";

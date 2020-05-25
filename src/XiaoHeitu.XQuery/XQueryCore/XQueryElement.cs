@@ -28,6 +28,7 @@ namespace XiaoHeitu.XQueryCore
         //    }
         //}
 
+        #region Text
         public IXQueryElement Text(string text)
         {
             TextAsync(text);
@@ -47,5 +48,22 @@ namespace XiaoHeitu.XQueryCore
         {
             return await xQuery.jsRuntime.InvokeAsync<string>("xquery.invoke", guid, "text");
         }
+        #endregion
+
+        #region Find
+        public IXQueryElement Find(string selector)
+        {
+            var cguid = Guid.NewGuid().ToString("N");
+            xQuery.jsRuntime.InvokeAsync<string>("xquery.invoke", guid, "find", selector);
+            return new XQueryElement(xQuery, cguid);
+        }
+
+        public async ValueTask<IXQueryElement> FindAsync(string selector)
+        {
+            var cguid = Guid.NewGuid().ToString("N");
+            await xQuery.jsRuntime.InvokeAsync<string>("xquery.invoke", guid, "find", selector);
+            return new XQueryElement(xQuery, cguid);
+        }
+        #endregion
     }
 }
