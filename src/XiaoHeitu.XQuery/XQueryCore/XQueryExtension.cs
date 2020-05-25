@@ -22,6 +22,7 @@ namespace XiaoHeitu.XQueryCore
         public static void AddXQuery(this IServiceCollection services)
         {
             services.AddTransient<XQuery>();
+            services.AddSingleton<XQueryNavigationManager>();
         }
 
         /// <summary>
@@ -31,6 +32,7 @@ namespace XiaoHeitu.XQueryCore
         public static void InitXQuery(this WebAssemblyHost host)
         {
             XQueryExtension.host = host;
+            var nm = host.Services.GetService<XQueryNavigationManager>();
         }
 
         /// <summary>

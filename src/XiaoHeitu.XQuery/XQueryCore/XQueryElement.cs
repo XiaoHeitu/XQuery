@@ -16,53 +16,43 @@ namespace XiaoHeitu.XQueryCore
             this.xQuery = xQuery;
             this.guid = guid;
         }
-        //public string Text
-        //{
-        //    get
-        //    {
-        //        return GetText().Result;
-        //    }
-        //    set
-        //    {
-        //        _ = SetText(value);
-        //    }
-        //}
 
         #region Text
         public IXQueryElement Text(string text)
         {
-            TextAsync(text);
+            xQuery.JsRuntime.InvokeVoid("xquery.invoke", guid, "text", new string[] { text });
             return this;
         }
         public string Text()
         {
-            return TextAsync().Result;
+            var result = xQuery.JsRuntime.Invoke<string>("xquery.invoke", guid, "text");
+            return result;
         }
 
         public async ValueTask<IXQueryElement> TextAsync(string text)
         {
-            await xQuery.jsRuntime.InvokeVoidAsync("xquery.invoke", guid, "text", new string[] { text });
+            await xQuery.JsRuntime.InvokeVoidAsync("xquery.invoke", guid, "text", new string[] { text });
             return this;
         }
         public async ValueTask<string> TextAsync()
         {
-            return await xQuery.jsRuntime.InvokeAsync<string>("xquery.invoke", guid, "text");
+            return await xQuery.JsRuntime.InvokeAsync<string>("xquery.invoke", guid, "text");
         }
         #endregion
 
         #region Find
         public IXQueryElement Find(string selector)
         {
-            var cguid = Guid.NewGuid().ToString("N");
-            xQuery.jsRuntime.InvokeAsync<string>("xquery.invoke", guid, "find", selector);
-            return new XQueryElement(xQuery, cguid);
+            var nguid = Guid.NewGuid().ToString("N");
+            xQuery.JsRuntime.Invoke<string>("xquery.find", selector, nguid, guid);
+            return new XQueryElement(xQuery, nguid);
         }
 
         public async ValueTask<IXQueryElement> FindAsync(string selector)
         {
-            var cguid = Guid.NewGuid().ToString("N");
-            await xQuery.jsRuntime.InvokeAsync<string>("xquery.invoke", guid, "find", selector);
-            return new XQueryElement(xQuery, cguid);
+            var nguid = Guid.NewGuid().ToString("N");
+            await xQuery.JsRuntime.InvokeAsync<string>("xquery.find", selector, nguid, guid);
+            return new XQueryElement(xQuery, nguid);
         }
         #endregion
     }

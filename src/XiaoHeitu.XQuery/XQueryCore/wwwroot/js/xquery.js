@@ -1,9 +1,19 @@
 ﻿window.xquery = {
     dommaps: {},
-    find: function (s, guid) {
+    resetdommaps: function () {
+        window.xquery.dommaps = {};
+    },
+    find: function (s, nguid, cguid) {
         var map = {};
-        map["E" + guid] = $(s);
+        if (cguid == undefined) {
+            map["E" + nguid] = $(s);
+        }
+        else {
+            var context = window.xquery.dommaps["E" + cguid]
+            map["E" + nguid] = $(s, context);
+        }
         $.extend(window.xquery.dommaps, map);
+        return nguid;
     },
     invoke: function (guid, f, ps) {
         var e = window.xquery.dommaps["E" + guid];

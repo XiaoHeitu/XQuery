@@ -3,6 +3,9 @@
 <h1>Counter</h1>
 
 <p id="pCur">Current count: 0</p>
+<div id="test">
+    <p>test</p>
+</div>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
@@ -16,9 +19,11 @@
             currentCount++;
 
             //通过ID选择器选择元素，并修改元素的InnerText
-            this.XQ("#pCur").Text($"Current count: {currentCount}");
+            //this.XQ("#pCur").Text($"Current count: {currentCount}");
 
-            //使代码停顿0.001 秒
+            //this.XQ("#test").Find("p").Text($"Current count: {currentCount}");
+            _= this.XQ("#test").Find("p").TextAsync($"Current count: {currentCount}");
+                //使代码停顿0.001 秒
             await Task.Delay(1);
         }
     }
