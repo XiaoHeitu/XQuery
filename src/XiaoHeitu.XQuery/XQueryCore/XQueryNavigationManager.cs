@@ -18,7 +18,6 @@ namespace XiaoHeitu.XQueryCore
             {
                 ResetDomMaps();
             };
-
         }
 
         private void ResetDomMaps()

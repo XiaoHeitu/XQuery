@@ -19,11 +19,13 @@
             currentCount++;
 
             //通过ID选择器选择元素，并修改元素的InnerText
-            //this.XQ("#pCur").Text($"Current count: {currentCount}");
+            this.XQ("#pCur").Text($"Current count: {currentCount}");
 
-            //this.XQ("#test").Find("p").Text($"Current count: {currentCount}");
-            _= this.XQ("#test").Find("p").TextAsync($"Current count: {currentCount}");
-                //使代码停顿0.001 秒
+            this.XQ("#test").Find("p").Text($"Current count: {currentCount}");
+
+            await this.XQ("#test").Find("p").TextAsync($"Current count: {currentCount}");
+            
+            //使代码停顿0.001 秒
             await Task.Delay(1);
         }
     }
